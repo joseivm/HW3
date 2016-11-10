@@ -40,9 +40,9 @@ class ArtistConvNet:
 
 		# Add max pooling
 		pooling = True
-		layer1_pool_filter_size = 1
+		layer1_pool_filter_size = 2
 		layer1_pool_stride = 1
-		layer2_pool_filter_size = 1
+		layer2_pool_filter_size = 2
 		layer2_pool_stride = 1
 
 		# Enable dropout and weight decay normalization

@@ -33,12 +33,22 @@
         Full train accuracy: 60.4%
 
     Filter = 1, Stride = 1:
-        Validation accuracy: 69.0%
-        Full train accuracy: 94.0%
+        Validation accuracy: 67.8%
+        Full train accuracy: 97.3%
     Filter = 2, Stride = 1:
+        Validation accuracy: 67.8%
+        Full train accuracy: 91.5%
     Filter = 3, Stride = 1:
+        Validation accuracy: 67.8%
+        Full train accuracy: 93.1%
+        Validation accuracy: 75.9%
+        Full train accuracy: 92.6%
+        Validation accuracy: 66.7%
+        Full train accuracy: 84.1%
     Filter = 4, Stride = 1:
-
+        Validation accuracy: 66.7%
+        Full train accuracy: 84.3%
+Really high variance. Filter size does not seem to matter. Use filter size of 2. Stride does matter. Use stride 1.
 4. Regularize your network!
 
 5. Experiment with your architecture

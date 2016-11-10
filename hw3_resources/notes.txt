@@ -49,7 +49,9 @@
         Validation accuracy: 66.7%
         Full train accuracy: 84.3%
 Really high variance. Filter size does not seem to matter. Use filter size of 2. Stride does matter. Use stride 1.
+
 4. Regularize your network!
+
 	Dropout: 
 	P = 0.8 
 		Validation accuracy: 63.2%
@@ -63,6 +65,47 @@ Really high variance. Filter size does not seem to matter. Use filter size of 2.
 	P = .5
 		Validation accuracy: 58.6%
 		Full train accuracy: 72.0%
+
+    Only Weight Penalty:
+    weight_penalty = 0.0
+        Validation accuracy: 67.8%
+        Full train accuracy: 94.5%
+    weight_penalty = 0.05
+        Validation accuracy: 67.8%
+        Full train accuracy: 90.4%
+    weight_penalty = 0.075
+        Validation accuracy: 65.5%
+        Full train accuracy: 83.5%
+    weight_penalty = 0.1
+        Validation accuracy: 71.3%
+        Full train accuracy: 78.6%
+        Validation accuracy: 64.4%
+        Full train accuracy: 81.0%
+        Validation accuracy: 60.9%
+        Full train accuracy: 75.0%
+    weight_penalty = 0.15
+        Validation accuracy: 60.9%
+        Full train accuracy: 76.9%
+        Validation accuracy: 65.5%
+        Full train accuracy: 83.5%
+    weight_penalty = 0.2
+        Validation accuracy: 59.8%
+        Full train accuracy: 68.7%
+    weight_penalty = 0.3
+        Validation accuracy: 55.2%
+        Full train accuracy: 60.7%
+    weight_penalty = 0.5
+        Validation accuracy: 54.0%
+        Full train accuracy: 60.4%
+    weight_penalty = 1.0
+        Validation accuracy: 37.9%
+        Full train accuracy: 41.5%
+
+    weight_penalty is best between 0.05 and 0.1. 
+
+    Only Data Augmentation:
+
+    Only Early Stopping:
 
 5. Experiment with your architecture
 

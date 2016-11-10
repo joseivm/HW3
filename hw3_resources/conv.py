@@ -46,8 +46,8 @@ class ArtistConvNet:
 		layer2_pool_stride = 1
 
 		# Enable dropout and weight decay normalization
-		dropout_prob = .7 # set to < 1.0 to apply dropout, 1.0 to remove
-		weight_penalty = 0.0 # set to > 0.0 to apply weight penalty, 0.0 to remove
+		dropout_prob = 1.0 # set to < 1.0 to apply dropout, 1.0 to remove
+		weight_penalty = 0.075 # set to > 0.0 to apply weight penalty, 0.0 to remove
 
 		with self.graph.as_default():
 			# Input data

@@ -1,8 +1,43 @@
 1. Convolutional filter receptive field
 
 2. Run the Tensorflow conv net
+    3 layers
+    2 convolutional, 1 fully connected
+
+    Relu is used on hidden nodes
+
+    Loss function is softmax_cross_entropy_with_logits
+
+    Initial implementation:
+    Batch loss at step 1500: 0.089476
+    Batch training accuracy: 100.0%
+    Validation accuracy: 67.8%
+    Full train accuracy: 94.0%
+    Finished training. Total time taken: 35.7028548717
+
+    Severely overfitting.
 
 3. Add pooling layers
+
+    Filter = 2, Stride = 1:
+        Validation accuracy: 70.1%
+        Full train accuracy: 92.3%
+    Filter = 2, Stride = 2:
+        Validation accuracy: 64.4%
+        Full train accuracy: 79.1%
+    Filter = 2, Stride = 3:
+        Validation accuracy: 50.6%
+        Full train accuracy: 66.5%
+    Filter = 2, Stride = 4:
+        Validation accuracy: 51.7%
+        Full train accuracy: 60.4%
+
+    Filter = 1, Stride = 1:
+        Validation accuracy: 69.0%
+        Full train accuracy: 94.0%
+    Filter = 2, Stride = 1:
+    Filter = 3, Stride = 1:
+    Filter = 4, Stride = 1:
 
 4. Regularize your network!
 

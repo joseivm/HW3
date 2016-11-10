@@ -39,11 +39,11 @@ class ArtistConvNet:
 		num_training_steps = 1501
 
 		# Add max pooling
-		pooling = False
-		layer1_pool_filter_size = 2
-		layer1_pool_stride = 2
-		layer2_pool_filter_size = 2
-		layer2_pool_stride = 2
+		pooling = True
+		layer1_pool_filter_size = 1
+		layer1_pool_stride = 1
+		layer2_pool_filter_size = 1
+		layer2_pool_stride = 1
 
 		# Enable dropout and weight decay normalization
 		dropout_prob = 1.0 # set to < 1.0 to apply dropout, 1.0 to remove

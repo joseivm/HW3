@@ -1,0 +1,13 @@
+1. Convolutional filter receptive field
+
+2. Run the Tensorflow conv net
+
+3. Add pooling layers
+
+4. Regularize your network!
+
+5. Experiment with your architecture
+
+6. Optimize your architecture
+
+7. Test your final architecture on variations of the data

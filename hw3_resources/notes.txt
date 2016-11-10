@@ -40,6 +40,19 @@
     Filter = 4, Stride = 1:
 
 4. Regularize your network!
+	Dropout: 
+	P = 0.8 
+		Validation accuracy: 63.2%
+		Full train accuracy: 83.0%
+	P = 0.7
+		Validation accuracy: 69.0%
+		Full train accuracy: 84.9%
+	P = 0.6
+		Validation accuracy: 65.5%
+		Full train accuracy: 84.9%
+	P = .5
+		Validation accuracy: 58.6%
+		Full train accuracy: 72.0%
 
 5. Experiment with your architecture
 

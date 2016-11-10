@@ -36,7 +36,6 @@ class ArtistConvNet:
 		layer2_depth = 16
 		layer2_stride = 2
 		layer3_num_hidden = 64
-		layer4_num_hidden = 64
 		num_training_steps = 1501
 
 		# Add max pooling
@@ -84,7 +83,7 @@ class ArtistConvNet:
 			layer3_biases = tf.Variable(tf.constant(1.0, shape=[layer3_num_hidden]))
 
 			layer4_weights = tf.Variable(tf.truncated_normal(
-			  [layer4_num_hidden, NUM_LABELS], stddev=0.1))
+			  [layer3_num_hidden, NUM_LABELS], stddev=0.1))
 			layer4_biases = tf.Variable(tf.constant(1.0, shape=[NUM_LABELS]))
 
 			# Model

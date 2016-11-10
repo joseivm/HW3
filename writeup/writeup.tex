@@ -1,0 +1,104 @@
+\documentclass[10pt,twoside]{article}
+
+\usepackage[margin=.8in]{geometry}
+\usepackage{epsfig}
+\usepackage{calc}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{pslatex}
+\usepackage{apalike}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\begin{document}
+
+\title{6.867 Machine Learning  \subtitle{Homework 3} }
+
+\maketitle
+
+% **************************************************************************************************
+ % Problem 1
+% **************************************************************************************************
+
+\section{\uppercase{Neural Networks}}
+
+\noindent Stuff
+
+
+\subsection{Implementation}
+
+\noindent smaller.
+
+\subsection{Section 2}
+
+
+\subsubsection{sub sub sub section}
+
+
+\subsection{Install Latex}
+
+% **************************************************************************************************
+ % Problem 2
+% **************************************************************************************************
+
+\section{\uppercase{Convolutional Neural Networks}}
+
+\noindent Stuff
+
+\subsection{Artiist}
+
+\noindent 
+
+\subsection{2D Dataset Results}
+
+Some table. 
+\begin{center}
+ \begin{tabular}{||c c c c||} 
+ \hline
+  & Training Error & Validation Error & Test Error \\ [0.5ex] 
+ \hline\hline
+ Dataset 1 & 0 & 0 & 0 \\ 
+ \hline
+ Dataset 2 & 0.1775 & 0.18 & 0.195 \\
+ \hline
+ Dataset 3 & 0.02 & 0.03 & 0.045 \\
+ \hline
+ Dataset 4 & 0.3 & 0.305 & 0.3 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[h]
+        \begin{subfigure}[b]{0.25\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{Figures/P2/svm_data1_test_C1.png}
+                \caption{Dataset 1, C=1}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.25\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{Figures/P2/svm_data2_test_C1.png}
+                \caption{Dataset 2, C=1}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.25\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{Figures/P2/svm_data3_test_C1.png}
+                \caption{Dataset 3, C=1}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.25\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{Figures/P2/svm_data4_test_C1.png}
+                \caption{Dataset 4, C=1}
+        \end{subfigure}
+        \caption{Linear SVM perfomance of different datasets. Datasets 1 and 3 are relatively linearly separable so this SVM performs well on them. Dataset 2 and 4 are definitely not linearly separable so this SVM is not the right model for the data.}\label{fig:animals}
+\end{figure}
+
+\subsection{Section}
+
+
+\vfill
+\end{document}
+

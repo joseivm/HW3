@@ -38,7 +38,7 @@ def evaluatePredict(X, Y, predict):
         y_pred = predict(x)
         if y != y_pred:
             misclass += 1
-            misclassifications.append(i)
+            misclassifications.append((y, y_pred))
 
     misclassrate = misclass*1.0/n
     print "# of misclass: ", misclass
@@ -48,9 +48,9 @@ def evaluatePredict(X, Y, predict):
 
 def buildNNPredict(X,Y, l):
     n,d = X.shape
-    layers = [d, d, 10]
+    layers = [d, d,d, 30]
     nn = Neural_Network(layers)
-    nn.train(X,Y, l, max_iter=10000)
+    nn.train(X,Y, l, max_iter=100000)
     predict = nn.predict
     return predict
 
@@ -61,7 +61,7 @@ def openMisclassifications(X,Y,misclassifications):
         plt.show()
 
 # ls = [0.01, 0.1, 1, 10, 100]
-ls = [0.01,1]
+ls = [0.01]
 
 print '======Setting Up======'
 trainX,trainY = buildTrainingSet()

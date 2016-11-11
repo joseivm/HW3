@@ -6,7 +6,8 @@ import math
 import time
 
 DATA_PATH = 'art_data/'
-DATA_FILE = DATA_PATH + 'art_data.pickle'
+# DATA_PATH = 'augmented_art_data.pickle'
+DATA_FILE = DATA_PATH + 'augmented_art_data.pickle'
 IMAGE_SIZE = 50
 NUM_CHANNELS = 3
 NUM_LABELS = 11
@@ -29,14 +30,14 @@ class ArtistConvNet:
 		# Hyperparameters
 		batch_size = 10
 		learning_rate = 0.01
-		layer1_filter_size = 5
+		layer1_filter_size = 15
 		layer1_depth = 16
 		layer1_stride = 2
-		layer2_filter_size = 5
+		layer2_filter_size = 15
 		layer2_depth = 16
 		layer2_stride = 2
 		layer3_num_hidden = 64
-		num_training_steps = 1501
+		num_training_steps = 6001
 
 		# Add max pooling
 		pooling = True
@@ -46,7 +47,7 @@ class ArtistConvNet:
 		layer2_pool_stride = 1
 
 		# Enable dropout and weight decay normalization
-		dropout_prob = .7 # set to < 1.0 to apply dropout, 1.0 to remove
+		dropout_prob = 1 # set to < 1.0 to apply dropout, 1.0 to remove
 		weight_penalty = 0.0 # set to > 0.0 to apply weight penalty, 0.0 to remove
 
 		with self.graph.as_default():

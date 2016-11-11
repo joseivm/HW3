@@ -26,11 +26,21 @@
 
 \section{\uppercase{Neural Networks}}
 
+<<<<<<< HEAD
 \noindent Neural networks are a highly successful approach to the classification problem in machine learning. In this section, we implement a feed-forward neural network from scratch and demonstrate its performance on a few simple datasets.
 
 \subsection{Implementation}
 
 \noindent 
+=======
+\noindent In this paper, we explore the performance of Neural Networks on different classification tasks. Neural Networks were invented to try to model how the neurons work in the human brain. A neural network consists of multiple layers of neurons, each of which takes a linear combination of its inputs and uses that to compute an output. 
+
+
+\subsection{Implementation}
+
+In our implementation of a neural network, we represented the the weights of each layer as an $m$ x $n$ matrix. Where $m$ is the size of the previous layer and $n$ is the size of the current layer. Each column in the matrix represented the weights for a single neuron in the layer. The bias term for each neuron was captured in a separate $n$ x 1 vector. We used ReLU activation functions for the neurons in the hidden layers and a softmax activation function for the last layer. The loss function we used was the cross entropy loss function, which is $\sum _i -y_i log(f(z)_i) $. Where $f(z)$ is the output of the softmax function. We used stochastic gradient descent to train the parameters of the network, which in this case are the weights and biases of each layer. Computing the gradient of a neural network with respect to the weights is a very complicated operation. Fortunately, the derivative can be found using backpropagation. Backpropagation finds the gradient of the loss function with respect to each layer by propagating the error back through the network. The first step in this is computing the graident of the loss function with respect to the output layer. A convenient property of the combination of a softmax output layer and the cross entropy function is that the derivative of the cost function with respect to the softmax function simplifies to $f(z)-t$ where $f(z)$ is the output of the softmax and $t$ is the target vector. 
+\noindent smaller.
+>>>>>>> 7cf74713ed36c608568bfeb7e8a083491e7f190d
 
 \subsection{Section 2}
 

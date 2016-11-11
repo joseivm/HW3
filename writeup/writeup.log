@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  10 NOV 2016 13:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  11 NOV 2016 15:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -421,92 +421,135 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 27.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 32.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
-LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 60
+LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 34
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 60
+LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 34
 .
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+psycm on input line 60
+LaTeX Font Info:    Try loading font information for OMX+psycm on input line 34
 .
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 60.
+LaTeX Font Info:    Try loading font information for U+msa on input line 34.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 60.
+LaTeX Font Info:    Try loading font information for U+msb on input line 34.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 34.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 34.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
-
-<Figures/P2/svm_data1_test_C1.png, id=1, 578.16pt x 433.62pt>
-File: Figures/P2/svm_data1_test_C1.png Graphic file (type png)
-
-<use Figures/P2/svm_data1_test_C1.png>
-Package pdftex.def Info: Figures/P2/svm_data1_test_C1.png used on input line 78
-.
-(pdftex.def)             Requested size: 124.66563pt x 93.49776pt.
-
-<Figures/P2/svm_data2_test_C1.png, id=3, 578.16pt x 433.62pt>
-File: Figures/P2/svm_data2_test_C1.png Graphic file (type png)
-
-<use Figures/P2/svm_data2_test_C1.png>
-Package pdftex.def Info: Figures/P2/svm_data2_test_C1.png used on input line 83
-.
-(pdftex.def)             Requested size: 124.66563pt x 93.49776pt.
-
-<Figures/P2/svm_data3_test_C1.png, id=4, 578.16pt x 433.62pt>
-File: Figures/P2/svm_data3_test_C1.png Graphic file (type png)
-
-<use Figures/P2/svm_data3_test_C1.png>
-Package pdftex.def Info: Figures/P2/svm_data3_test_C1.png used on input line 88
-.
-(pdftex.def)             Requested size: 124.66563pt x 93.49776pt.
-
-<Figures/P2/svm_data4_test_C1.png, id=5, 578.16pt x 433.62pt>
-File: Figures/P2/svm_data4_test_C1.png Graphic file (type png)
-
-<use Figures/P2/svm_data4_test_C1.png>
-Package pdftex.def Info: Figures/P2/svm_data4_test_C1.png used on input line 93
-.
-(pdftex.def)             Requested size: 124.66563pt x 93.49776pt.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 34.
  [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Figur
-es/P2/svm_data1_test_C1.png> <./Figures/P2/svm_data2_test_C1.png> <./Figures/P2
-/svm_data3_test_C1.png> <./Figures/P2/svm_data4_test_C1.png>] (./writeup.aux) )
- 
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+LaTeX Warning: File `Figures/P2/svm_data1_test_C1.png' not found on input line 
+141.
+
+
+! Package pdftex.def Error: File `Figures/P2/svm_data1_test_C1.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.141 ...ewidth]{Figures/P2/svm_data1_test_C1.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Figures/P2/svm_data2_test_C1.png' not found on input line 
+146.
+
+
+! Package pdftex.def Error: File `Figures/P2/svm_data2_test_C1.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.146 ...ewidth]{Figures/P2/svm_data2_test_C1.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Figures/P2/svm_data3_test_C1.png' not found on input line 
+151.
+
+
+! Package pdftex.def Error: File `Figures/P2/svm_data3_test_C1.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.151 ...ewidth]{Figures/P2/svm_data3_test_C1.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Figures/P2/svm_data4_test_C1.png' not found on input line 
+156.
+
+
+! Package pdftex.def Error: File `Figures/P2/svm_data4_test_C1.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.156 ...ewidth]{Figures/P2/svm_data4_test_C1.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2] [3] (./writeup.aux) ) 
 Here is how much of TeX's memory you used:
- 4489 strings out of 493089
- 66424 string characters out of 6134842
- 133939 words of memory out of 5000000
- 7892 multiletter control sequences out of 15000+600000
- 23036 words of font info for 51 fonts, out of 8000000 for 9000
+ 4484 strings out of 493089
+ 65892 string characters out of 6134842
+ 138939 words of memory out of 5000000
+ 7877 multiletter control sequences out of 15000+600000
+ 28261 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,7n,38p,352b,454s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
-live/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/
-texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on writeup.pdf (1 page, 293365 bytes).
+ 38i,6n,38p,1543b,454s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/ba
+se/8r.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-di
+st/fonts/type1/urw/times/utmri8a.pfb>
+Output written on writeup.pdf (3 pages, 79971 bytes).
 PDF statistics:
- 26 PDF objects out of 1000 (max. 8388607)
- 12 compressed objects within 1 object stream
+ 47 PDF objects out of 1000 (max. 8388607)
+ 33 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

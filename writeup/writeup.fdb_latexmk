@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1478897802 "writeup.tex" "writeup.pdf" "writeup" 1478897803
+["pdflatex"] 1478903369 "writeup.tex" "writeup.pdf" "writeup" 1478903369
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -91,9 +91,9 @@
   "Figures/P2/svm_data4_test_C1.png" 0 -1 0 ""
   "apalike.sty" 1412953120 1152 7e0216a1c626932f944fefc448e30fd5 ""
   "article.cls" 1475175061 19941 2ceda103c90826221636cd93dbb0953e ""
-  "writeup.aux" 1478897803 1516 72005cb31baffd30ccb6ccd798cda8c1 ""
-  "writeup.tex" 1478897802 9131 df589c7ebc78e126edae2202b7daeb2d ""
+  "writeup.aux" 1478903369 1516 f0cf4adb57d679ec15454d1393f1fb29 ""
+  "writeup.tex" 1478903368 11486 89842c45729a07e4146ce5d592369c54 ""
   (generated)
+  "writeup.aux"
   "writeup.log"
   "writeup.pdf"
-  "writeup.aux"

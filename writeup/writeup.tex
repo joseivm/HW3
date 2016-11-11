@@ -56,16 +56,40 @@ In this section, we will explore the effect of different filter sizes, architect
 
 \noindent Paintings were padded to 50x50 pixel RGB images and inputed as a three layer image. We fed these images through various CNNs implemented with TensorFlow. A CNN can consist of multiple layers and each layer takes three arguments, filter size, stride, and depth. Stride is how many pixels the filter shifts each time and is typically 1 or 2. Depth is the number of filters working in parallel at that layer. Note that if a layer has a depth of 8, a filter of size 3 in the next layer actually has $9*8$ nodes feeding into it. The receptive field of a node is defined as the number of pixels in the original image that contribute to it. For example, if a image was fed through a 5x5 filter layer and then a 3x3 filter layer, the receptive field of a node in the last layer would be 7x7. This means that that nodes can only activate in response to features in the original image of size up to their receptive field. Adding more layers increases the receptive field size and allows the last layer to decide to activate based on more complex patterns.
 
-After the convolutional layers, we also added one fully connected layer with 64 hidden units that was also fully connected to the output to help with classification. The network was trained with stochastic gradient descent with batch size of 10.
-
 \subsubsection{Baseline}
- Our baseline was two layers, both with a filter size of $5$, stride of $2$, and a depth of 16. This achieved a classification accuracy of $~63\%$. 
+ Our architecture consisted of one input layer, two convolutional layers, one fully connected layer and one output layer. The fully connected layer contains 64 hidden units and is there to help the output layer with classification. All nodes use RELU activation and output layer uses softmax. The loss function is softmax cross entropy loss ???
+
+\begin{equation*}
+hi
+\end{equation*}
+The network was trained with stochastic gradient descent with batch size of 10.
+
+ In this paper, we only explore the effects of changing the convolutional layers. The baseline contains was two convolutional layers, both with a filter size of $5$, stride of $2$, and a depth of 16. This achieved a classification accuracy of $~63\%$ and a training accuracy of $~97\%$. This means that our model is severely overfitting the training set.
 
 \subsubsection{Pooling}
+The ReLu activation function on each node in the CNN is often times not selective enough to isolate the important features in an image. Max pooling is an idea that aims to improve selectivity by amplifying high activation and throwing away low activation. After every convolution layer, we add a pooling layer. Max pooling, like filtering, also acts on a $fxf$ window but outputs not a linear combination of the nodes but the max. In this manner, only the large activations survive. Pooling also has a stride length. We applied the same pooling after all the layers.
+
+\begin{center}
+ \begin{tabular}{||c c c c||} 
+ \hline
+  & Size = 2 & Size = 3 & Size = 4 \\ [0.5ex] 
+ \hline\hline
+ Stride = 1 & 69.1 & 67.8 & 66.7 \\ 
+ \hline
+ Stride = 2 & 64.4 & 63.2 & 65.2 \\
+ \hline
+ Stride = 3 & 50.6 & 54.4 & 54.2 \\
+ \hline
+ Stride = 4 & 51.7 & 49.6 & 50.2 \\
+ \hline
+\end{tabular}
+\end{center}
+
+Notice that as the stride length increase and the filter size increases, the max pooling becomes more and more aggressive and it throws away more and more data. As you can see in the table above, the classification accuracy gets worse. We found that for two layers, the optimal stride length was 1 and filter size was 2 and it had an accuracy that was a significantly better than our baseline.
 
 \subsubsection{Filter Size and Stride Length}
 
- We first started experimenting with different filter sizes and stride lengths while keeping both layers the same.
+ Next, we experimented with convolutional layers of different filter sizes and stride lengths. We kept the max pooling at window size 2 and stride 1 and used two identical convolutional layers. The results are summarized in the table below.
 
 \begin{center}
  \begin{tabular}{||c c c c c||} 
@@ -83,14 +107,11 @@ After the convolutional layers, we also added one fully connected layer with 64 
 \end{tabular}
 \end{center}
 
- We found that decreasing the stride length to 1 dramatically increased runtime without much gain in accuracy while increasing the stride length could quickly decreased accuracy. Increasing the filter sizes of both layers did not significant improve perfomace past 5 but increased runtime.
-
-Thus for any layer, the optimal filter size and stride length combinations for good performance and runtime were $(3,1)$, $(5,2)$ and $(7,2)$.
+ As you can see, accuracy was consistantly the best when stride length was 1. The accuracy also seems to improve with filter size but not by much past 5. The more significant tradeoff here was runtime. Small filter sizes and large stride length look significantly less time to train. For filter size 15 and stride 1, the CNN took upwards of 15 minutes. We noticed that there was not much reason to use filter sizes larger than 5 and for large filter sizes, stride lengths of 1 and 2 had roughly the same performance. Thus we decided the optimal filter size and stride length combinations for convolutional layers were $(3,1)$, $(5,2)$ and $(7,2)$.
 
 \subsubsection{3 Layers}
-At first, the jump to 3 layers did not yield any notable improvement. Using three uniform layers, with filter sizes of 5 and depth of 16, 
-
-We then tried different architectures and the results are documented in the table below. Note that a filter size of 5 implies a stride length of 2, etc.
+With two layers, the best performance we achieved was only $~68\%$ validation accuracy. Thus, we tried increasing the complexity of our network. We used three convolutional layers as opposed to two and varied their parameters. The results are shown in the table below.
+Note that a filter size of 5 implies a stride length of 2, etc.
 
 \begin{center}
  \begin{tabular}{||c c c c c c||} 
@@ -110,10 +131,13 @@ We then tried different architectures and the results are documented in the tabl
 \end{tabular}
 \end{center}
 
-The uniform architectures took did not significant outperform 2 layer architectures but took much more time to train. One idea was to stack the 
+Initial tests were not promising. Adding another baseline convolutional layer to the network took more time to train and did not improve the classification accuracy at all. We then tried the pyramid structure for the convolutional layers. We gave the first layer a large filter size
+We then experimented with increasing the complexity of the architecture to improve our performance. We tried three convolution layers instead of two and although the network took more time to train, we did not yield any notable improvement. Using three uniform layers with filter sizes of 5 and depths of 16, we achieved a classification accuracy of .
+
+The uniform architectures took did not significantly outperform 2 layer architectures but took much more time to train. One idea was to stack the 
 
 \subsection{Regularization}
-
+Across all architectures, overfitting the training data was a common theme. With no regularization, the CNNs commonly achieved training accuracy of close to $100\%$. Validation accuracy only ever reached the high 60s. 
 Explain dropout.
 
 \begin{center}

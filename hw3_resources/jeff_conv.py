@@ -6,7 +6,8 @@ import math
 import time
 
 DATA_PATH = 'art_data/'
-DATA_FILE = DATA_PATH + 'art_data.pickle'
+# DATA_FILE = DATA_PATH + 'art_data.pickle'
+DATA_FILE = DATA_PATH + 'augmented_art_data.pickle'
 IMAGE_SIZE = 50
 NUM_CHANNELS = 3
 NUM_LABELS = 11
@@ -29,14 +30,17 @@ class ArtistConvNet:
 		# Hyperparameters
 		batch_size = 10
 		learning_rate = 0.01
-		layer1_filter_size = 5
-		layer1_depth = 16
-		layer1_stride = 2
+		layer1_filter_size = 3
+		layer1_depth = 32
+		layer1_stride = 1
 		layer2_filter_size = 5
 		layer2_depth = 16
 		layer2_stride = 2
+		layer0_filter_size = 7
+		layer0_depth = 8
+		layer0_stride = 2
 		layer3_num_hidden = 64
-		num_training_steps = 1501
+		num_training_steps = 1501*4
 
 		# Add max pooling
 		pooling = True
@@ -44,10 +48,12 @@ class ArtistConvNet:
 		layer1_pool_stride = 1
 		layer2_pool_filter_size = 2
 		layer2_pool_stride = 1
+		layer0_pool_filter_size = 2
+		layer0_pool_stride = 1
 
 		# Enable dropout and weight decay normalization
 		dropout_prob = 1.0 # set to < 1.0 to apply dropout, 1.0 to remove
-		weight_penalty = 0.075 # set to > 0.0 to apply weight penalty, 0.0 to remove
+		weight_penalty = 0.0 # set to > 0.0 to apply weight penalty, 0.0 to remove
 
 		with self.graph.as_default():
 			# Input data
@@ -78,9 +84,20 @@ class ArtistConvNet:
 			if pooling:
 				layer2_feat_map_size = int(math.ceil(float(layer2_feat_map_size) / layer2_pool_stride))
 
+			layer0_weights = tf.Variable(tf.truncated_normal(
+				[layer0_filter_size, layer0_filter_size, layer2_depth, layer0_depth], stddev=0.1))
+			layer0_biases = tf.Variable(tf.constant(1.0, shape=[layer0_depth]))
+			layer0_feat_map_size = int(math.ceil(float(layer2_feat_map_size) / layer0_stride))
+			if pooling:
+				layer0_feat_map_size = int(math.ceil(float(layer0_feat_map_size) / layer0_pool_stride))
+
 			layer3_weights = tf.Variable(tf.truncated_normal(
-				[layer2_feat_map_size * layer2_feat_map_size * layer2_depth, layer3_num_hidden], stddev=0.1))
+				[layer0_feat_map_size * layer0_feat_map_size * layer0_depth, layer3_num_hidden], stddev=0.1))
 			layer3_biases = tf.Variable(tf.constant(1.0, shape=[layer3_num_hidden]))
+
+			# layer3_weights = tf.Variable(tf.truncated_normal(
+			# 	[layer2_feat_map_size * layer2_feat_map_size * layer2_depth, layer3_num_hidden], stddev=0.1))
+			# layer3_biases = tf.Variable(tf.constant(1.0, shape=[layer3_num_hidden]))
 
 			layer4_weights = tf.Variable(tf.truncated_normal(
 			  [layer3_num_hidden, NUM_LABELS], stddev=0.1))
@@ -107,7 +124,21 @@ class ArtistConvNet:
 					hidden = tf.nn.max_pool(hidden, ksize=[1, layer2_pool_filter_size, layer2_pool_filter_size, 1], 
 									   strides=[1, layer2_pool_stride, layer2_pool_stride, 1],
                          			   padding='SAME', name='pool2')
-				
+				# Layer 0
+				conv0 = tf.nn.conv2d(hidden, layer0_weights, [1, layer0_stride, layer0_stride, 1], padding='SAME')
+				hidden = tf.nn.relu(conv0 + layer0_biases)
+
+				if pooling:
+					hidden = tf.nn.max_pool(hidden, ksize=[1, layer0_pool_filter_size, layer0_pool_filter_size, 1], 
+									   strides=[1, layer0_pool_stride, layer0_pool_stride, 1],
+                         			   padding='SAME', name='pool0')
+
+				# # Layer 3
+				# shape = hidden.get_shape().as_list()
+				# reshape = tf.reshape(hidden, [shape[0], shape[1] * shape[2] * shape[3]])
+				# hidden = tf.nn.relu(tf.matmul(reshape, layer0_weights) + layer0_biases)
+				# hidden = tf.nn.dropout(hidden, dropout_keep_prob)
+
 				# Layer 3
 				shape = hidden.get_shape().as_list()
 				reshape = tf.reshape(hidden, [shape[0], shape[1] * shape[2] * shape[3]])

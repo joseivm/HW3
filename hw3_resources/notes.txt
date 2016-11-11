@@ -68,11 +68,17 @@ Really high variance. Filter size does not seem to matter. Use filter size of 2.
 
     Only Weight Penalty:
     weight_penalty = 0.0
+        Validation accuracy: 65.5%
+        Full train accuracy: 90.7%
         Validation accuracy: 67.8%
         Full train accuracy: 94.5%
     weight_penalty = 0.05
         Validation accuracy: 67.8%
-        Full train accuracy: 90.4%
+        Full train accuracy: 90.4% 
+        Validation accuracy: 71.3%
+        Full train accuracy: 90.9% 
+        Validation accuracy: 64.4%
+        Full train accuracy: 85.7%
     weight_penalty = 0.075
         Validation accuracy: 65.5%
         Full train accuracy: 83.5%
@@ -101,9 +107,25 @@ Really high variance. Filter size does not seem to matter. Use filter size of 2.
         Validation accuracy: 37.9%
         Full train accuracy: 41.5%
 
-    weight_penalty is best between 0.05 and 0.1. 
+    weight_penalty is best at about 0.05. Not very effective.
 
     Only Data Augmentation:
+        Validation accuracy: 70.1%
+        Full train accuracy: 98.8%
+
+    Try stopping at 3500.
+        Dropout = 0.7, weight_penalty = 0.05
+            Validation accuracy: 66.7%
+            Full train accuracy: 83.2%
+
+    Try stopping at 6000.
+        Dropout = 0.7, weight_penalty = 0.05
+            Validation accuracy: 67.8%
+            Full train accuracy: 95.4%
+        Dropout = 0.5, weight_penalty = 0.05
+            Validation accuracy: 64.4%
+            Full train accuracy: 87.2%
+
 
     Only Early Stopping:
 

@@ -30,9 +30,10 @@ class Neural_Network(object):
 
 
 
-	def train(self, X, Y, l, max_iter = 10000):
+	def train(self, X, Y, Xv, Yv, l, max_iter = 10000):
 		n,d = X.shape
-
+		no_improvement = 0
+		prev_error = np.inf
 		for c in xrange(int(max_iter/n)+1):
 			indexes = np.arange(n)
 			np.random.shuffle(indexes)
@@ -49,7 +50,17 @@ class Neural_Network(object):
 				self.compute_gradients(x,y)
 				for layer in self.layers:
 					layer.update_weights(l)
-			print errors
+
+			y_pred = self.predictX(Xv)
+			current_error = compare(Yv,y_pred)
+			if current_error - prev_error < 0.001:
+				no_improvement += 1
+			prev_error = current_error
+			if no_improvement > 100:
+				break
+		# print 'max iter'
+			# print errors
+		# print no_improvement
 
 	def compute_gradients(self, x, y):
 		self.backprob(x,y)
@@ -131,22 +142,43 @@ def compare(Y, Y_pred):
 		if Y[i][0] != Y_pred[i]:
 			errors += 1
 			# print Y[i][0], Y_pred[i]
-	print 1-(errors*1.0)/n
+	# print 1-(errors*1.0)/n
+	return (errors*1.0)/n
 
 if __name__ == '__main__':
-	train = np.loadtxt('data/data_3class.csv')
-	X = train[:, 0:2].copy()
-	Y = train[:, 2:3].copy()
-	# print X
-	# print Y
-	n,d = X.shape
-	layers = [d, 10, 3]
-	NN = Neural_Network(layers)
-	NN.train(X,Y, l=1, max_iter=10000)
 
-	Y_pred = NN.predictX(X)
-	print Y_pred
-	compare(Y, Y_pred)
+	for dataset in range(1,5):
+		# dataset = '2'
+		print dataset
+		train = np.loadtxt('data_2/data'+str(dataset)+'_train.csv')
+		X = train[:, 0:2].copy()
+		Y = train[:, 2:3].copy()
+		Y = (Y+1)/2
+
+		test = np.loadtxt('data_2/data'+str(dataset)+'_test.csv')
+		X_test = test[:, 0:2].copy()
+		Y_test = test[:, 2:3].copy()
+		Y_test = (Y_test+1)/2
+
+		validate = np.loadtxt('data_2/data'+str(dataset)+'_validate.csv')
+		X_val = validate[:, 0:2].copy()
+		Y_val = validate[:, 2:3].copy()
+		Y_val = (Y_val+1)/2
+		# print X
+		# print Y
+		n,d = X.shape
+		layers = [d, 20,20, 2]
+		NN = Neural_Network(layers)
+		NN.train(X,Y,X_val,Y_val,l=.01, max_iter=200000)
+
+
+
+		Y_pred = NN.predictX(X)
+		Y_pred_test = NN.predictX(X_test)
+		# print Y_pred
+		print 1 - compare(Y, Y_pred)
+		print 1 - compare(Y_test, Y_pred_test)
+
 
 
 

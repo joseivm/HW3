@@ -41,16 +41,16 @@ def evaluatePredict(X, Y, predict):
             misclassifications.append((y, y_pred))
 
     misclassrate = misclass*1.0/n
-    print "# of misclass: ", misclass
-    print "Accuracy rate: ", 1-misclassrate
-    print "Misclassifications: ", misclassifications
+    # print "# of misclass: ", misclass
+    # print "Accuracy rate: ", 1-misclassrate
+    # print "Misclassifications: ", misclassifications
     return misclassrate, misclassifications
 
-def buildNNPredict(X,Y, l):
+def buildNNPredict(X,Y,Xv,Yv, l):
     n,d = X.shape
-    layers = [d, d,d, 30]
+    layers = [d, 20,20, 10]
     nn = Neural_Network(layers)
-    nn.train(X,Y, l, max_iter=100000)
+    nn.train(X,Y,Xv,Yv,l, max_iter=500000)
     predict = nn.predict
     return predict
 
@@ -60,8 +60,8 @@ def openMisclassifications(X,Y,misclassifications):
         plt.imshow(data, cmap = plt.get_cmap('gray'))
         plt.show()
 
-# ls = [0.01, 0.1, 1, 10, 100]
-ls = [0.01]
+ls = [0.0001,0.001,0.01, 0.1, 1, 10]
+# ls = [0.01]
 
 print '======Setting Up======'
 trainX,trainY = buildTrainingSet()
@@ -71,7 +71,7 @@ testX, testY = buildTestSet()
 print '======Training======'
 predicts = []
 for l in ls:
-    predict = buildNNPredict(trainX, trainY, l)
+    predict = buildNNPredict(trainX, trainY, valX, valY, l)
     predicts.append((l, predict))
     
     misclassifications = evaluatePredict(trainX, trainY, predict)
@@ -94,7 +94,7 @@ for param,predict in predicts:
 print '======Best Validation======'
 print "Param: ", bestParam
 print "Misclassification rate: ", bestmisclassrate
-print "Misclassifications: ", bestmisclassifications
+# print "Misclassifications: ", bestmisclassifications
 # openMisclassifications(valX, valY, bestmisclassifications)
 
 print '======Testing======'

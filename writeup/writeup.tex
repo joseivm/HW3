@@ -54,26 +54,23 @@ Neural networks often overfit to the training data becuase they have many parame
 
 \section{\uppercase{Convolutional Neural Networks}}
 
-\noindent Convolutional neural networks(CNNs) are similar to feed forward neural networks but are better suited for the task of image recognition. Traditional neural networks use fully connected layers and hidden units to classify inputs. For even small 50x50 pixel images though, the squared factor of weights between layers that need to be trained quickly makes this problem untractable for any reasonably size dataset.  CNNs solves this problem by recycling parameters with a concept called filters. A filter is a $fxf$ matrix of weights that gets applied to every possible $fxf$ square in the $nxn$ input image to generate another $nxn$ output. Similar to NNs, these outputs then also undergo some nonlinear transformation. Many filters can be applied in parallel to the same input and the output of filters can be fed into the input of other filters. In this manner, CNNs boost a diverse set of possible architectures have made remarkable progress in image recognition.
+\noindent Convolutional neural networks(CNNs) are similar to feed forward neural networks but are better suited for the task of image recognition. Traditional neural networks use fully connected layers and hidden units to classify inputs. For even small 50x50 pixel images though, the squared factor of weights between layers that need to be trained quickly makes this problem untractable for any reasonably sized dataset.  CNNs solves this problem by recycling parameters with a concept called filters. A filter is a $fxf$ matrix of weights that gets applied to $fxf$ squares in the $nxn$ input image to generate an output image. Similar to NNs, these outputs then also undergo some nonlinear transformation. Many filters can be applied in parallel to the same input and the outputs of filters can be fed as inputs of other filters. In this manner, CNNs boost a diverse set of possible architectures and have enabled remarkable progress in image recognition.
 
 In this section, we will explore the effect of different filter sizes, architectures, pooling, and regularization techniques on CNNs. The task was classifying images of paintings to their artist.
 
-\subsection{Architecture}
+\subsection{Set Up}
 
-\noindent Paintings were padded to 50x50 pixel RGB images and inputed as a three layer image. We fed these images through various CNNs implemented with TensorFlow. A CNN can consist of multiple layers and each layer takes three arguments, filter size, stride, and depth. Stride is how many pixels the filter shifts each time and is typically 1 or 2. Depth is the number of filters working in parallel at that layer. Note that if a layer has a depth of 8, a filter of size 3 in the next layer actually has $9*8$ nodes feeding into it. The receptive field of a node is defined as the number of pixels in the original image that contribute to it. For example, if a image was fed through a 5x5 filter layer and then a 3x3 filter layer, the receptive field of a node in the last layer would be 7x7. This means that that nodes can only activate in response to features in the original image of size up to their receptive field. Adding more layers increases the receptive field size and allows the last layer to decide to activate based on more complex patterns.
+\noindent Paintings were shrunk and padded to 50x50 pixel RGB images and inputed as a three layer image. We fed these images through various CNNs implemented with TensorFlow. A CNN can consist of multiple layers and each layer takes three arguments; filter size, stride, and depth. Stride is how many pixels the filter shifts each time and is typically 1 or 2. Depth is the number of filters working in parallel at that layer. Note that if a layer has a depth of 8, a filter of size 3 in the next layer actually has $9*8$ nodes feeding into it. The receptive field of a node is defined as the number of pixels in the original image that contribute to it. For example, if a image was fed through a 5x5 filter layer and then a 3x3 filter layer, the receptive field of a node in the last layer would be 7x7. This means that that nodes can only activate in response to features in the original image of size up to their receptive field. Adding more layers increases the receptive field size and allows the last layer to decide to activate based on larger and more complex patterns.
 
 \subsubsection{Baseline}
- Our architecture consisted of one input layer, two convolutional layers, one fully connected layer and one output layer. The fully connected layer contains 64 hidden units and is there to help the output layer with classification. All nodes use RELU activation and output layer uses softmax. The loss function is softmax cross entropy loss ???
+ The architecture consists of one input layer, two convolutional layers, one fully connected layer and one output layer. The fully connected layer contains 64 hidden units and helps the output layer with classification. All nodes use RELU activation and output layer uses softmax. The loss function is softmax cross entropy loss(See Section 1 for equation). The network was trained with stochastic gradient descent with batch size of 10.
 
-\begin{equation*}
-hi
-\end{equation*}
-The network was trained with stochastic gradient descent with batch size of 10.
+ In this paper, we only explore the effects of changing the convolutional layers. The baseline contains was two convolutional layers, both with a filter size of $5$, stride of $2$, and a depth of 16. This achieved a classification accuracy of $63\%$ and a training accuracy of $98\%$. This means that our model is severely overfitting the training set and is not generalizing well.
 
- In this paper, we only explore the effects of changing the convolutional layers. The baseline contains was two convolutional layers, both with a filter size of $5$, stride of $2$, and a depth of 16. This achieved a classification accuracy of $~63\%$ and a training accuracy of $~97\%$. This means that our model is severely overfitting the training set.
+\subsection{Pooling}
+The ReLu activation functions in the CNN alone are oftentimes not good enough at isolate the important features in an image. Max pooling is an idea that aims to improve the selectivity of a CNN by actively amplifying high activation signals and throwing away low activation noise. After every convolution layer, a pooling layer, like filtering, acts on a $fxf$ window to outputs not a linear combination of the nodes but the max. This way, only the large activations survive. 
 
-\subsubsection{Pooling}
-The ReLu activation function on each node in the CNN is often times not selective enough to isolate the important features in an image. Max pooling is an idea that aims to improve selectivity by amplifying high activation and throwing away low activation. After every convolution layer, we add a pooling layer. Max pooling, like filtering, also acts on a $fxf$ window but outputs not a linear combination of the nodes but the max. In this manner, only the large activations survive. Pooling also has a stride length. We applied the same pooling after all the layers.
+We tested out pooling on our CNN with diffent filter sizes and stride lengths. For simplicity, we used the baseline architecture and applied the same pooling after both the convolutional layers.
 
 \begin{center}
  \begin{tabular}{||c c c c||} 
@@ -91,103 +88,119 @@ The ReLu activation function on each node in the CNN is often times not selectiv
 \end{tabular}
 \end{center}
 
-Notice that as the stride length increase and the filter size increases, the max pooling becomes more and more aggressive and it throws away more and more data. As you can see in the table above, the classification accuracy gets worse. We found that for two layers, the optimal stride length was 1 and filter size was 2 and it had an accuracy that was a significantly better than our baseline.
+As you can see in the table above, as stride length and the filter size increase, the accuracy goes down. This is because the max pooling becomes too aggressive and throws away too much data. We found that for correctly chosen values, the classification accuracy improved substantially over our baseline, from $63\%$ to $67\%$. The optimal stride length was 1 and filter size was 2.
 
-\subsubsection{Filter Size and Stride Length}
+\subsection{Filter Size and Stride Length}
 
- Next, we experimented with convolutional layers of different filter sizes and stride lengths. We kept the max pooling at window size 2 and stride 1 and used two identical convolutional layers. The results are summarized in the table below.
+ Next, we experimented with convolutional layers of different filter sizes and stride lengths. We still used our baseline architecture but kept max pooling at window size 2 and stride 1. The results are summarized in the table below.
 
 \begin{center}
  \begin{tabular}{||c c c c c||} 
  \hline
   & Filter = 3 & Filter = 5 & Filter = 9 & Filter = 15 \\ [0.5ex] 
  \hline\hline
- Stride = 1 & 0 & 0 & 0 & 0 \\ 
+ Stride = 1 & 16 & 69 & 68 & N/A \\ 
  \hline
- Stride = 2 & 0 & 0 & 0 & 0 \\
+ Stride = 2 & 67 & 69 & 70 & 68 \\
  \hline
- Stride = 3 & 0 & 0 & 0 & 0 \\
+ Stride = 3 & 66 & 68 & 69 & 68 \\
  \hline
- Stride = 4 & 0 & 0 & 0 & 0 \\
+ Stride = 4 & 63 & 59 & 64 & 66 \\
  \hline
 \end{tabular}
 \end{center}
 
- As you can see, accuracy was consistantly the best when stride length was 1. The accuracy also seems to improve with filter size but not by much past 5. The more significant tradeoff here was runtime. Small filter sizes and large stride length look significantly less time to train. For filter size 15 and stride 1, the CNN took upwards of 15 minutes. We noticed that there was not much reason to use filter sizes larger than 5 and for large filter sizes, stride lengths of 1 and 2 had roughly the same performance. Thus we decided the optimal filter size and stride length combinations for convolutional layers were $(3,1)$, $(5,2)$ and $(7,2)$.
+ The accuracy also seems to improve with filter size but not by much past 5. The more significant tradeoff here was runtime. Stride lengths of 1 took a really long time to train. Small filter sizes and large stride length take less time to train. For filter size 15 and stride 1, the CNN took an impractical amount of time. Since there is not much reason to use filter sizes larger than 5 and for most filters, stride lengths of 1 and 2 had roughly the same performance, we decided the optimal filter size and stride length combinations for convolutional layers were $(5,2)$ and $(7,2)$.
 
-\subsubsection{3 Layers}
+\subsection{3 Convolutional Layers}
 With two layers, the best performance we achieved was only $~68\%$ validation accuracy. Thus, we tried increasing the complexity of our network. We used three convolutional layers as opposed to two and varied their parameters. The results are shown in the table below.
 Note that a filter size of 5 implies a stride length of 2, etc.
 
 \begin{center}
  \begin{tabular}{||c c c c c c||} 
  \hline
- Layer 1 & Layer 2 & Layer 3 & Classification Accuracy & Training Accuracy & Training Time \\ [0.5ex] 
+ Layer 1 & Layer 2 & Layer 3 & Classification Accuracy & Training Accuracy \\ [0.5ex] 
  \hline\hline
- (5, 16) & (5,16) & (5,16) & 0 & 0 & 40 sec \\ 
+ (5, 16) & (5,16) & (5,16) & 66 & 99 \\ 
  \hline
- (7, 16) & (7,16) & (7,16) & 0 & 0 & 40 sec \\ 
+ (7, 16) & (7,16) & (7,16) & 67 & 99 \\ 
  \hline
- (7, 8)  & (5,16) & (3,32) & 0 & 0 & 40 sec \\ 
+ (7, 8)  & (5,16) & (3,32) & 70 & 99 \\ 
  \hline
- (3, 4)  & (5,8) & (7,16) & 0 & 0 & 40 sec \\ 
+ (3, 4)  & (5,8) & (7,16) & 62 & 99 \\ 
  \hline
- (3, 8)  & (5,16) & (7,32) & 0 & 0 & 40 sec \\ 
+ (3, 8)  & (5,16) & (7,32) & 63 & 99 \\ 
  \hline
 \end{tabular}
 \end{center}
 
-Initial tests were not promising. Adding another baseline convolutional layer to the network took more time to train and did not improve the classification accuracy at all. We then tried the pyramid structure for the convolutional layers. We gave the first layer a large filter size
-We then experimented with increasing the complexity of the architecture to improve our performance. We tried three convolution layers instead of two and although the network took more time to train, we did not yield any notable improvement. Using three uniform layers with filter sizes of 5 and depths of 16, we achieved a classification accuracy of .
+Initial tests were not promising. Adding another baseline convolutional layer to the network took more time to train and did not improve the classification accuracy at all. We then tried the pyramid structure for the convolutional layers. We gave the first layer a large filter size but a small depth, the second layer a medium filter size and a medium depth, and the third layer a small filter size with a large depth. This result is shown in row 3 and it performed marginally better at $70\%$.
 
-The uniform architectures took did not significantly outperform 2 layer architectures but took much more time to train. One idea was to stack the 
+The inverted pyramid with the same specification required much more time to run because the layer with the greatest depth had to operate on the full 50x50 pixel image. That layer also only had a stride of 1 so its output did not shrink the image for future layers. Even with the extra runtime though, the network did not perform notably.
 
 \subsection{Regularization}
-Across all architectures, overfitting the training data was a common theme. With no regularization, the CNNs commonly achieved training accuracy of close to $100\%$. Validation accuracy only ever reached the high 60s. 
-Explain dropout.
+Across all architectures, overfitting the training data was a common theme. With no regularization, the CNNs commonly achieved training accuracy of close to $100\%$. Validation accuracy only ever reached the high 60s. For simplicity, all regularization techniques were tested on the baseline architecture.
+
+\subsubsection{Dropout}
+Dropout is a regularization technique where during training, with certain probability a node's contribution to the network is ignored. This makes it so many different nodes or filters have to agree and work together to track certain features, thereby making it more difficult to overfit to the training data. The table below documents the results. Unsurprisingly, the greater the dropout, the worse the training accuracy. Unfortunately, validation accuracy also appeared to drop and validation accuracy with dropout never outperformed validation accuracy without.
 
 \begin{center}
  \begin{tabular}{||c c c c c||} 
  \hline
-  & Dropout = 0.5 & Dropout = 0.7 & Dropout = 0.9  & Dropout = 1.0 \\ [0.5ex] 
+  & Dropout = 0.5 & Dropout = 0.6 & Dropout = 0.7  & Dropout = 0.8 \\ [0.5ex] 
  \hline\hline
- Classification Accuracy & 0 & 0 & 0 & 0 \\ 
+ Classification Accuracy & 58.6 & 64.5 & 66.0 & 65.8 \\ 
  \hline
- Training Accuracy       & 0 & 0 & 0 & 0 \\
+ Training Accuracy       & 72.0 & 82.9 & 84.9 & 85.0 \\
  \hline
 \end{tabular}
 \end{center}
 
-Dropout not very effective.
-Data augmentation only effective
+
+\subsubsection{Weight Regularization}
+Weight regularization involves penalizing the size of the weights in the nodes. As penalization increases, training error drops monotonically but unfortunately so did validation accuracy. Again, this technique was of limited effectiveness. 
+
+\subsubsection{Early Stopping}
+In our experience, after training for an extended period of time, the validation accuracy plateaus. For every architecture we tried, we erred on the side of excessive training and then decreased the iterations later.
+
+\subsubsection{Data Augmentation}
+Data augmentation was the only technique we found to have some, albeit marginal, effect. For most models, data augmentation had a $1-1.5\%$ benefit. Intuitively, this makes sense because by artificially introducing noise into your training data, the network can better train to recognize features in the painting from the artist that generalize better.
 
 
 \subsection{Results}
-Our optimal CNN architecture is a 3 layer pyramid. Words
+In conclusion, our optimal CNN architecture was a 3 layer pyramid structure. The first layer had a filter size of 7, depth of 8 and a stride length of 2. The second layer had a filter size of 5, depth of 16, and a stride length of 2. The third layer had a filter size of 5, depth of 32, and a stride length of 1. It took 4.5 minutes to train with data augmentation achieved an validition accuracy of $71\%$. The test accuracy was $69\%$.
 
-\begin{figure}[h]
-        \begin{subfigure}[b]{0.25\textwidth}
-                \centering
-                \includegraphics[width=\linewidth]{Figures/P2/svm_data1_test_C1.png}
-                \caption{Dataset 1, C=1}
-        \end{subfigure}%
-        \begin{subfigure}[b]{0.25\textwidth}
-                \centering
-                \includegraphics[width=\linewidth]{Figures/P2/svm_data2_test_C1.png}
-                \caption{Dataset 2, C=1}
-        \end{subfigure}%
-        \begin{subfigure}[b]{0.25\textwidth}
-                \centering
-                \includegraphics[width=\linewidth]{Figures/P2/svm_data3_test_C1.png}
-                \caption{Dataset 3, C=1}
-        \end{subfigure}%
-        \begin{subfigure}[b]{0.25\textwidth}
-                \centering
-                \includegraphics[width=\linewidth]{Figures/P2/svm_data4_test_C1.png}
-                \caption{Dataset 4, C=1}
-        \end{subfigure}
-        \caption{Linear SVM perfomance of different datasets. Datasets 1 and 3 are relatively linearly separable so this SVM performs well on them. Dataset 2 and 4 are definitely not linearly separable so this SVM is not the right model for the data.}\label{fig:animals}
-\end{figure}
+To better understand our CNN, we also wanted to figure out what kind of features our CNN focuses on to classify images. To do this, we took our test set performed certain transformations on the images. We translated, changed the brightness and the contrast, and even inverted the images and then recorded the classification accuracy.
+
+\begin{center}
+ \begin{tabular}{||c c||} 
+ \hline
+ Test Dataset & Test Accuracy \\ [0.5ex] 
+ \hline\hline
+ Normal Validation Data & 69.0 \\ 
+ \hline
+ Translated Data & 20.7 \\ 
+ \hline
+ Brightened Data & 52.9 \\ 
+ \hline
+ Darkened Data & 63.2 \\ 
+ \hline
+ High Contrast Data & 52.9 \\ 
+ \hline
+ Low Contrast Data & 63.2 \\ 
+ \hline
+ Flipped Data & 52.9 \\ 
+ \hline
+ Inverted Data & 16.1 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+The CNN was very robust to changes in brightness and contrast. This is very good. We already knew the network would classifies images not by their absolute color but their relationship to their neighbors but this invariance tells us that the dependence on neighbors is also not absolute. The CNN is also invariant to being flipped so the relationship with the neighbors is not tied to a direction.
+
+The network however could not handle the colors being inverted. We suspect this is because even though the features in the flipped colors are preserved through the linear combination with the weights, the nonlinear RELU functions are trained for normal colors. These activation functions would not trigger for the flipped colors and the information about the features would be not be passed on to the next layer.
+
+Most surprisingly though, is the fact that the network could not handle translation. CNNs consider features relative to their neighbors so we originally thought the network should be most robust to it. We think what threw off the network was the padding. The unexpected placement of the black padding in the middle of the image may have been enough to misclassify the image.
 
 \vfill
 \end{document}

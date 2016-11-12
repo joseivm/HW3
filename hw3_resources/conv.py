@@ -30,17 +30,17 @@ class ArtistConvNet:
 		# Hyperparameters
 		batch_size = 10
 		learning_rate = 0.01
-		layer1_filter_size = 5
+		layer1_filter_size = 9
 		layer1_depth = 16
 		layer1_stride = 2
-		layer2_filter_size = 5
+		layer2_filter_size = 9
 		layer2_depth = 16
 		layer2_stride = 2
 		layer3_num_hidden = 64
-		num_training_steps = 6001
+		num_training_steps = 9001
 
 		# Add max pooling
-		pooling = False
+		pooling = True
 		layer1_pool_filter_size = 2
 		layer1_pool_stride = 1
 		layer2_pool_filter_size = 2

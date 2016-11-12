@@ -77,12 +77,34 @@ Neural networks often overfit to the training data becuase they have many parame
 \subsection{Binary Classification}
 
 We evaluated the performance of different network architectures on binary classification problems. The network architectures we tested were a single hidden layer with 3 units, a single hidden layer with 20 units, two hidden layers with 3 units, and two hidden layers with 20 units. We found that the number of layers in the network was the parameter most sensive to changes in the learning rate. for two layered networks, we found the optimal learning rate to be 0.01. For single layer networks, 
-we found that the optimal learning rate was 1. To avoid overfitting, we used a validation set to evaluate the performance of the ne
+we found that the optimal learning rate was 1. To avoid overfitting, we used a validation set to evaluate the performance of the classifier after each update. We stopped training once the network's performance on the validation set started to decline. This was effective in keeping the network's score on the training set close to its score on the test set. The network architecture that worked best for binary classification was a network with two hidden layers, each with 20 units. This was able to achieve an accuracy of over 94\% on the test sets. The results of our experiments are shown in the table below. 
+
+\begin{center}
+ \begin{tabular}{||c c c c||} 
+ \hline
+ \multicolumn{4}{|c|}{Single Hidden Layer with 3 Units} \\
+ \hline
+ \hline
+ Data 1 & Data 2 & Data 3 & Data 4 \\ [0.5ex] 
+  \hline
+ 100\% & 82\% & 98.25\% & 88\% \\
+ \hline\hline
+ 100\% & 78\% & 95.5\% & 86\% \\ 
+
+ \hline
+\end{tabular}
+\end{center}
 
 \subsubsection{sub sub sub section}
 
 
-\subsection{Install Latex}
+\subsection{MNIST Classification}
+
+We then evaluated the performance of different network architectures on the task of classifying handwritten digits. We tested the same network architectures we used for binary classification. The two hidden layer architecture with 20 units per layer performed the best, achieving an accuracy of over 90\%. We noticed that the most commonly misclassified digits were 3 and 5. The results of our experiments are shown in the table below. 
+
+\subsection{Discussion}
+
+The performance of the networks seemed to increase as more hidden units were added. The network with a single hidden layer of 20 units outperformed the network with two hidden layers of 3 units in both tasks. However, adding more units came with the trade off of longer training times. 
 
 % **************************************************************************************************
  % Problem 2

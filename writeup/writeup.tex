@@ -31,17 +31,44 @@
 
 \subsection{Implementation}
 
-In our implementation of a neural network, we represented the the weights of each layer as an $m$ x $n$ matrix. Where $m$ is the size of the previous layer and $n$ is the size of the current layer. Each column in the matrix represented the weights for a single neuron in the layer. The bias term for each neuron was captured in a separate $n$ x 1 vector. We used ReLU activation functions for the neurons in the hidden layers and a softmax activation function for the last layer. The loss function we used was the cross entropy loss function, which is $\sum _i -y_i log(f(z)_i) $. Where $f(z)$ is the output of the softmax function. We used stochastic gradient descent to train the parameters of the network, which in this case are the weights and biases of each layer. Computing the gradient of a neural network with respect to the weights is a very complicated operation. Fortunately, the derivative can be found using backpropagation. Backpropagation finds the gradient of the loss function with respect to each layer by propagating the error back through the network. The first step in this is computing the graident of the loss function with respect to the output layer. A convenient property of the combination of a softmax output layer and the cross entropy function is that the derivative of the cost function with respect to the softmax function simplifies to $f(z)-t$ where $f(z)$ is the output of the softmax and $t$ is the target vector. 
+In our implementation of a neural network, we represented the the weights of each layer as an $m$ x $n$ matrix. Where $m$ is the size of the previous layer and $n$ is the size of the current layer. Each column in the matrix represented the weights for a single neuron in the layer. The bias term for each neuron was captured in a separate $n$ x 1 vector. We used ReLU activation functions for the neurons in the hidden layers and a softmax activation function for the last layer. The loss function we used was the cross entropy loss function, which is 
 
-How the weights are initialized plays an important part in the training of neural networks. In the case where the hidden units have sigmoid functions, if the weights are too small then the nonlinearity of the sigmoid funciton is lost. This is because the derivative of the sigmoid function is approximately linear for inputs close to zero. If the weights are too large, then the derivative of the sigmoid approaches zero, which can negatively impact the gradient descent, causing it to converge to a suboptimal value, or to take too long to train. One approach to handle this problem is to initialize the weights to come from a Gaussian distribution with zero mean and variance of $1/m$ where $m$ is the number of units in the previous layer. For a linear neuron, we have that $y = \sum_i w_i x_i +b$. Calculating the variance gives us Var($y$) = Var($\sum_i w_i x_i$). Var($w_i x_i$) = $E(w_i)^2$Var($w_i$) + $E(w_i)^2$Var($x_i$) + Var($w_i$)Var($x_i$). If we assume that the inputs have zero mean, then the expression simplifies to Var($w_i x_i$) = Var($w_i$)Var($x_i$). Substituting into the originial equation gives us Var($y$) = $\sum_i Var(w_i)Var(x_i)$. Since they are identically distributed, we can rewrite it as Var($y$) = $m$Var($w_i$)Var($x_i$). Thus, setting Var($w_i$) = $1/m$ guarantees that the variance of the input will be equal to the variance of the output under these assumptions. This helps stabilize the signals that are propagated through the network. 
+$\sum _i -y_i log(f(z)_i) $. 
+
+Where $f(z)$ is the output of the softmax function. We used stochastic gradient descent to train the parameters of the network, which in this case are the weights and biases of each layer. Computing the gradient of a neural network with respect to the weights is a very complicated operation. Fortunately, the derivative can be found using backpropagation. Backpropagation finds the gradient of the loss function with respect to each layer by propagating the error back through the network. The first step in this is computing the graident of the loss function with respect to the output layer. A convenient property of the combination of a softmax output layer and the cross entropy function is that the derivative of the cost function with respect to the softmax function simplifies to 
+
+$f(z)-t$ 
+
+where $f(z)$ is the output of the softmax and $t$ is the target vector. 
+
+\subsection{Weight Initialization}
+
+How the weights are initialized plays an important part in the training of neural networks. In the case where the hidden units have sigmoid functions, if the weights are too small then the nonlinearity of the sigmoid funciton is lost. This is because the derivative of the sigmoid function is approximately linear for inputs close to zero. If the weights are too large, then the derivative of the sigmoid approaches zero, which can negatively impact the gradient descent, causing it to converge to a suboptimal value, or to take too long to train. One approach to handle this problem is to initialize the weights to come from a Gaussian distribution with zero mean and variance of $1/m$ where $m$ is the number of units in the previous layer. For a linear neuron, we have that 
+$y = \sum_i w_i x_i +b$. 
+Calculating the variance gives us 
+Var($y$) = Var($\sum_i w_i x_i$). 
+Var($w_i x_i$) = $E(w_i)^2$Var($w_i$) + $E(w_i)^2$Var($x_i$) + Var($w_i$)Var($x_i$). 
+If we assume that the inputs have zero mean, then the expression simplifies to 
+Var($w_i x_i$) = Var($w_i$)Var($x_i$). 
+Substituting into the originial equation gives us 
+Var($y$) = $\sum_i Var(w_i)Var(x_i)$. 
+Since they are identically distributed, we can rewrite it as 
+
+Var($y$) = $m$Var($w_i$)Var($x_i$). 
+
+Thus, setting Var($w_i$) = $1/m$ guarantees that the variance of the input will be equal to the variance of the output under these assumptions. This helps stabilize the signals that are propagated through the network. 
+
+\subsection{Regularization}
 
 Neural networks often overfit to the training data becuase they have many parameters. One way to stop the model from overfitting is to use regularization. Regularization aims to prevent overfitting by penalizing the size of the weight vector. This is implemented by adding the term $\lambda (\sum_j  \left \|w^{(j)}  \right \|^2_F )$ to the cost function, where $w^{j}$ represents the weights at layer $j$. Integrating this with our implementation only involved adding a $\lambda w$ term to the gradient of the loss function at every layer. Thus, the gradient of the loss function with respect to the weights at layer $i$ is $\frac{\partial C}{\partial w_i} + \lambd w_i$. The learning rule for stochastic gradient descent becomes $w \rightarrow (1- \eta \lambda)w - \eta \frac{\partial C}{\partial w} $ where $C$ is the cross entropy loss function.
 
 
 \noindent smaller.
 
-\subsection{Section 2}
+\subsection{Binary Classification}
 
+We evaluated the performance of different network architectures on binary classification problems. The network architectures we tested were a single hidden layer with 3 units, a single hidden layer with 20 units, two hidden layers with 3 units, and two hidden layers with 20 units. We found that the number of layers in the network was the parameter most sensive to changes in the learning rate. for two layered networks, we found the optimal learning rate to be 0.01. For single layer networks, 
+we found that the optimal learning rate was 1. To avoid overfitting, we used a validation set to evaluate the performance of the ne
 
 \subsubsection{sub sub sub section}
 

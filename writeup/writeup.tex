@@ -147,7 +147,7 @@ we found that the optimal learning rate was 1. To avoid overfitting, we used a v
 
 \subsection{MNIST Classification}
 
-We then evaluated the performance of different network architectures on the task of classifying handwritten digits. We tested the same network architectures we used for binary classification. The two hidden layer architecture with 20 units per layer performed the best, achieving an accuracy of over 90\%. We noticed that the most commonly misclassified digits were 3 and 5. The architectures and their misclassification rates are shown below. 
+We then evaluated the performance of different network architectures on the task of classifying handwritten digits. We normalized the data to aid the performance of our network. We found that the network became very innacurate when the data wasn't normalized. We tested the same network architectures we used for binary classification. The two hidden layer architecture with 20 units per layer performed the best, achieving an accuracy of over 90\%. We noticed that the most commonly misclassified digits were 3 and 5. The architectures and their misclassification rates are shown below. 
 
 \begin{center}
 \begin{tabular}{ |c|c| } 
@@ -162,7 +162,7 @@ We then evaluated the performance of different network architectures on the task
 
 \subsection{Discussion}
 
-The performance of the networks seemed to increase as more hidden units were added. The network with a single hidden layer of 20 units outperformed the network with two hidden layers of 3 units in both tasks. However, adding more units came with the trade off of longer training times. 
+The performance of the networks seemed to increase as more hidden units were added. The network with a single hidden layer of 20 units outperformed the network with two hidden layers of 3 units in both tasks. However, adding more units came with the trade off of longer training times. Our neural network outperformed the SVM with a Guassian Kernel that we had previously tested. 
 
 % **************************************************************************************************
  % Problem 2
